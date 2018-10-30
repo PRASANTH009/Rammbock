@@ -49,32 +49,7 @@ Multiple TCP servers
     Server 'Server_1' should get 'foo' from '${CLIENT}':'${CLIENT 1 PORT}'
     Server 'Server_2' should get 'bar' from '${CLIENT}':'${CLIENT 2 PORT}'
 
-SCTP Client sends binary to server
-    [Tags]    ${EMPTY}
-    [Setup]    Setup SCTP server and client
-    Client sends binary    foo
-    ${message}=    Server receives binary
-    Should be equal    ${message}    foo
 
-SCTP Server sends binary to client
-    [Tags]    ${EMPTY}
-    [Setup]    Setup SCTP server and client
-    Server sends binary    foo
-    ${message}=    Client receives binary
-    Should be equal    ${message}    foo
-
-Error for missing client
-    [Setup]   Define example protocol
-    Run keyword and expect error  No clients defined!   Client sends binary   foo
-
-Error for missing server
-    [Setup]   Define example protocol
-    Run keyword and expect error  No servers defined!   Server sends binary   foo
-
-Error for missing server connection
-    [Setup]   Define example protocol
-    Start TCP server    ${SERVER}    ${SERVER PORT}    protocol=Example
-    Run keyword and expect error  No connections accepted!   Server receives binary
 
 Timeouts failure when accepting connection
     [Setup]
